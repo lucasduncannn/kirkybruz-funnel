@@ -1,65 +1,793 @@
-import Image from "next/image";
+'use client';
+
+import { motion, useScroll, useTransform, useInView } from 'framer-motion';
+import { useRef, useState, useEffect } from 'react';
+
+// Animated counter component
+function AnimatedCounter({ target, suffix = '' }: { target: number; suffix?: string }) {
+  const [count, setCount] = useState(0);
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: '-100px' });
+
+  useEffect(() => {
+    if (!isInView) return;
+    
+    let current = 0;
+    const increment = target / 30;
+    const timer = setInterval(() => {
+      current += increment;
+      if (current >= target) {
+        setCount(target);
+        clearInterval(timer);
+      } else {
+        setCount(Math.floor(current));
+      }
+    }, 50);
+
+    return () => clearInterval(timer);
+  }, [isInView, target]);
+
+  return <span ref={ref}>{count}{suffix}</span>;
+}
+
+// Particle background component
+function ParticleBackground() {
+  const [particles, setParticles] = useState<Array<{id: number; x: number; y: number}>>([]);
+
+  useEffect(() => {
+    // Only run on client side
+    const newParticles = Array.from({ length: 20 }).map((_, i) => ({
+      id: i,
+      x: Math.random() * window.innerWidth,
+      y: Math.random() * window.innerHeight,
+    }));
+    setParticles(newParticles);
+  }, []);
+
+  return (
+    <div className="absolute inset-0 overflow-hidden">
+      {particles.map((particle) => (
+        <motion.div
+          key={particle.id}
+          className="absolute w-1 h-1 bg-[#00d4ff] rounded-full opacity-30"
+          initial={{ 
+            x: particle.x, 
+            y: particle.y 
+          }}
+          animate={{
+            y: [0, -200, 0],
+            opacity: [0, 0.5, 0],
+          }}
+          transition={{
+            duration: 3 + Math.random() * 2,
+            repeat: Infinity,
+            delay: Math.random() * 2,
+          }}
+        />
+      ))}
+    </div>
+  );
+}
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
+    <div className="min-h-screen bg-[#0a0a0a] text-white font-sans">
+      {/* Hero Section */}
+      <section className="relative min-h-screen flex items-center justify-center px-4 py-20 overflow-hidden">
+        <ParticleBackground />
+        
+        {/* Animated gradient background */}
+        <div className="absolute inset-0 opacity-20">
+          <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#ff6b00] rounded-full mix-blend-multiply filter blur-3xl animate-pulse" />
+          <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-[#00d4ff] rounded-full mix-blend-multiply filter blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+        </div>
+
+        <div className="relative z-10 max-w-5xl mx-auto text-center">
+          {/* Main Headline */}
+          <motion.h1
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="text-5xl md:text-8xl font-black mb-6 leading-tight"
+          >
+            Built Different.
+            <br />
+            <span className="bg-gradient-to-r from-[#ff6b00] to-[#00d4ff] bg-clip-text text-transparent">
+              Live Different.
+            </span>
+          </motion.h1>
+
+          {/* New Subheadline */}
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto font-semibold"
+          >
+            One payment. Lifetime access. No BS.
+          </motion.p>
+
+          {/* Before → After Visual */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            className="grid md:grid-cols-2 gap-8 mb-12 max-w-3xl mx-auto"
+          >
+            <div className="p-8 bg-red-500/10 border border-red-500/30 rounded-xl">
+              <p className="text-sm text-gray-400 mb-2">BEFORE</p>
+              <div className="space-y-2">
+                <p className="text-2xl font-bold text-red-400">😴 Tired</p>
+                <p className="text-gray-400">Brain fog & no focus</p>
+                <p className="text-gray-400">Can't see results</p>
+              </div>
+            </div>
+            <div className="p-8 bg-[#00d4ff]/10 border border-[#00d4ff]/30 rounded-xl">
+              <p className="text-sm text-gray-400 mb-2">AFTER</p>
+              <div className="space-y-2">
+                <p className="text-2xl font-bold text-[#00d4ff]">⚡ Energized</p>
+                <p className="text-gray-400">Sharp & focused daily</p>
+                <p className="text-gray-400">Built & confident</p>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Limited Spots Badge */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.8 }}
+            className="mb-8"
+          >
+            <div className="inline-block bg-gradient-to-r from-[#ff6b00] to-orange-600 px-6 py-2 rounded-full text-sm font-bold animate-pulse">
+              ⏰ Limited: Only 50 spots open this month
+            </div>
+          </motion.div>
+
+          {/* CTA Button */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 1 }}
+          >
             <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+              href="https://whop.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block bg-gradient-to-r from-[#ff6b00] to-orange-600 text-[#0a0a0a] px-12 py-4 rounded-lg font-black text-lg hover:shadow-2xl hover:shadow-[#ff6b00]/50 transition-all duration-300 group relative overflow-hidden"
             >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+              <span className="relative z-10 flex items-center gap-2">
+                Get The Plan
+                <motion.span
+                  animate={{ x: [0, 5, 0] }}
+                  transition={{ duration: 1.5, repeat: Infinity }}
+                >
+                  →
+                </motion.span>
+              </span>
+              <div className="absolute inset-0 bg-gradient-to-r from-orange-600 to-[#ff6b00] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            </a>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Visual Roadmap Section */}
+      <section className="py-20 px-4 bg-[#111111]">
+        <div className="max-w-5xl mx-auto">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="text-4xl md:text-5xl font-black mb-16 text-center"
+          >
+            Your Journey
+          </motion.h2>
+
+          {/* Horizontal Timeline */}
+          <div className="relative">
+            {/* Connecting Line */}
+            <div className="absolute top-8 left-0 right-0 h-1 bg-gradient-to-r from-[#ff6b00]/30 via-[#00d4ff]/50 to-[#ff6b00]/30" />
+
+            {/* Timeline Stages */}
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-8 relative z-10">
+              {[
+                {
+                  stage: 1,
+                  title: "You're In",
+                  desc: 'Get instant access to everything',
+                  icon: '🔓',
+                },
+                {
+                  stage: 2,
+                  title: 'Foundation',
+                  desc: 'Lock in your diet and daily habits',
+                  icon: '🏗️',
+                },
+                {
+                  stage: 3,
+                  title: 'Momentum',
+                  desc: 'Energy and confidence start clicking',
+                  icon: '⚡',
+                },
+                {
+                  stage: 4,
+                  title: 'Built Different',
+                  desc: 'This is just how you live now',
+                  icon: '👑',
+                },
+              ].map((item, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: i * 0.15 }}
+                  viewport={{ once: true }}
+                  className="text-center"
+                >
+                  {/* Glowing Node */}
+                  <div className="flex justify-center mb-6">
+                    <motion.div
+                      animate={{
+                        boxShadow: ['0 0 20px rgba(255, 107, 0, 0.5)', '0 0 40px rgba(0, 212, 255, 0.8)', '0 0 20px rgba(255, 107, 0, 0.5)'],
+                      }}
+                      transition={{
+                        duration: 3,
+                        repeat: Infinity,
+                        delay: i * 0.3,
+                      }}
+                      className="w-16 h-16 bg-gradient-to-br from-[#ff6b00] to-[#00d4ff] rounded-full flex items-center justify-center text-3xl border-2 border-[#00d4ff]/50"
+                    >
+                      {item.icon}
+                    </motion.div>
+                  </div>
+
+                  {/* Stage Number and Title */}
+                  <div className="mb-2">
+                    <p className="text-[#00d4ff] font-bold text-sm mb-1">STAGE {item.stage}</p>
+                    <h3 className="text-2xl font-black">{item.title}</h3>
+                  </div>
+
+                  {/* Description */}
+                  <p className="text-gray-400 text-sm">{item.desc}</p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+
+          {/* Roadmap Note */}
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            viewport={{ once: true }}
+            className="text-center text-gray-400 mt-16 text-lg italic"
+          >
+            Go at your own pace. You're in for life.
+          </motion.p>
+        </div>
+      </section>
+
+      {/* Video Placeholder Section */}
+      <section className="py-20 px-4 relative">
+        <div className="max-w-4xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="relative rounded-xl overflow-hidden"
+          >
+            <div className="relative w-full aspect-video bg-gradient-to-br from-[#111111] to-[#1a1a1a] rounded-xl border border-[#ff6b00]/30 flex items-center justify-center group cursor-pointer">
+              {/* Video placeholder */}
+              <div className="absolute inset-0 bg-gradient-to-br from-[#ff6b00]/10 to-[#00d4ff]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              
+              <motion.div
+                animate={{ scale: [1, 1.1, 1] }}
+                transition={{ duration: 2, repeat: Infinity }}
+                className="text-7xl relative z-10"
+              >
+                ▶️
+              </motion.div>
+
+              {/* Text overlay */}
+              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[#0a0a0a] to-transparent p-6">
+                <p className="text-xl font-bold text-white">Watch Kirkybruz Explain The System</p>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Transformation Journey */}
+      <section className="py-20 px-4 bg-[#111111]">
+        <div className="max-w-5xl mx-auto">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="text-4xl md:text-5xl font-black mb-4 text-center"
+          >
+            Your Transformation Journey
+          </motion.h2>
+          <p className="text-center text-gray-400 mb-16 text-lg">
+            No time limit. Go at your own pace. Lifetime access means you own this forever.
           </p>
+
+          {/* Journey Steps */}
+          <div className="grid md:grid-cols-4 gap-6">
+            {[
+              { title: 'Day 1: You\'re In', desc: 'Access everything. Get your plan.' },
+              { title: 'First Wins', desc: 'Energy & focus return. Brain fog gone.' },
+              { title: 'Level Up', desc: 'The boys start noticing. You feel powerful.' },
+              { title: 'Final Form', desc: 'Built different. Living different.' },
+            ].map((step, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: i * 0.1 }}
+                viewport={{ once: true }}
+                className="relative"
+              >
+                <motion.div 
+                  whileHover={{ y: -8 }}
+                  className="p-8 bg-[#0a0a0a] rounded-lg border border-[#ff6b00]/20 hover:border-[#ff6b00] hover:shadow-lg hover:shadow-[#ff6b00]/20 transition-all duration-300 group"
+                >
+                  <div className="text-5xl font-black text-[#ff6b00] mb-4 group-hover:scale-110 transition-transform">
+                    {i + 1}
+                  </div>
+                  <h3 className="text-2xl font-bold mb-3">{step.title}</h3>
+                  <p className="text-gray-400">{step.desc}</p>
+                </motion.div>
+                {i < 3 && (
+                  <div className="hidden md:block absolute -right-3 top-1/4 text-[#00d4ff] font-bold text-xl">
+                    →
+                  </div>
+                )}
+              </motion.div>
+            ))}
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+      </section>
+
+      {/* Before/After Transformation Stats */}
+      <section className="py-20 px-4">
+        <div className="max-w-5xl mx-auto">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="text-4xl md:text-5xl font-black mb-16 text-center"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            What Happens When You Commit
+          </motion.h2>
+
+          <div className="grid md:grid-cols-2 gap-12">
+            {/* Where You Are Now */}
+            <motion.div
+              initial={{ opacity: 0, x: -40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+            >
+              <h3 className="text-3xl font-bold mb-8 text-gray-400">Where You Are Now</h3>
+              <div className="space-y-6">
+                {[
+                  { icon: '😴', text: 'Exhausted by afternoon' },
+                  { icon: '🌫️', text: 'Brain fog daily' },
+                  { icon: '📉', text: 'No visible results' },
+                  { icon: '😕', text: 'Lacking confidence' },
+                  { icon: '💭', text: 'Zero motivation' },
+                ].map((item, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.6, delay: i * 0.1 }}
+                    viewport={{ once: true }}
+                    className="flex items-center gap-4 p-4 bg-red-500/10 border border-red-500/20 rounded-lg"
+                  >
+                    <span className="text-3xl">{item.icon}</span>
+                    <span className="text-gray-300">{item.text}</span>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+
+            {/* Where You'll Be */}
+            <motion.div
+              initial={{ opacity: 0, x: 40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+            >
+              <h3 className="text-3xl font-bold mb-8 text-[#00d4ff]">Where You'll Be</h3>
+              <div className="space-y-6">
+                {[
+                  { icon: '⚡', text: 'All-day energy', stat: '+2x' },
+                  { icon: '🧠', text: 'Crystal clear focus', stat: '+100%' },
+                  { icon: '💪', text: 'Visible muscle gain', stat: '+10kg' },
+                  { icon: '😎', text: 'Authentic confidence', stat: '+Max' },
+                  { icon: '🔥', text: 'Unstoppable drive', stat: '+∞' },
+                ].map((item, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, x: 20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.6, delay: i * 0.1 }}
+                    viewport={{ once: true }}
+                    className="flex items-center justify-between p-4 bg-[#00d4ff]/10 border border-[#00d4ff]/30 rounded-lg group hover:border-[#00d4ff] hover:bg-[#00d4ff]/20 transition-all"
+                  >
+                    <div className="flex items-center gap-4">
+                      <span className="text-3xl">{item.icon}</span>
+                      <span className="text-gray-300">{item.text}</span>
+                    </div>
+                    <span className="font-black text-[#00d4ff] text-lg">{item.stat}</span>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Big Stats */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            viewport={{ once: true }}
+            className="grid md:grid-cols-3 gap-8 mt-20"
           >
-            Documentation
-          </a>
+            {[
+              { label: 'Energy Boost', value: 2, suffix: 'x' },
+              { label: 'Stronger', value: 10, suffix: 'kg' },
+              { label: 'Confidence', value: 100, suffix: '%' },
+            ].map((stat, i) => (
+              <div key={i} className="p-8 bg-[#111111] rounded-lg border border-[#ff6b00]/30 text-center">
+                <p className="text-gray-400 mb-4">{stat.label}</p>
+                <p className="text-6xl font-black text-[#ff6b00]">
+                  <AnimatedCounter target={stat.value} suffix={stat.suffix} />
+                </p>
+              </div>
+            ))}
+          </motion.div>
         </div>
-      </main>
+      </section>
+
+      {/* What's Inside the Club */}
+      <section className="py-20 px-4 bg-[#111111]">
+        <div className="max-w-5xl mx-auto">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="text-4xl md:text-5xl font-black mb-6 text-center"
+          >
+            What's Inside the Club
+          </motion.h2>
+          <p className="text-center text-gray-400 mb-16 text-lg max-w-2xl mx-auto">
+            Lifetime access. Updates forever. No upsells. No BS. Everything you need to get built different.
+          </p>
+
+          {/* Course Modules */}
+          <div className="grid md:grid-cols-3 gap-8 mb-16">
+            {[
+              {
+                icon: '🍽️',
+                title: 'Diet Plan',
+                features: ['Exact meal breakdown', 'Macro targets', 'Supplement stack', 'Shopping lists'],
+              },
+              {
+                icon: '⚙️',
+                title: 'Daily Habits',
+                features: ['Sleep protocol', 'Training schedule', 'Stress management', 'Recovery guide'],
+              },
+              {
+                icon: '🧠',
+                title: 'Mental Game',
+                features: ['Mindset framework', 'Confidence hacks', 'Motivation tips', 'Discipline system'],
+              },
+            ].map((module, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: i * 0.1 }}
+                viewport={{ once: true }}
+                className="p-8 bg-[#0a0a0a] rounded-lg border-2 border-[#ff6b00] hover:border-[#00d4ff] hover:shadow-lg hover:shadow-[#00d4ff]/20 transition-all duration-300 group cursor-pointer transform hover:-translate-y-2"
+              >
+                <div className="text-6xl mb-4 group-hover:scale-125 transition-transform">{module.icon}</div>
+                <h3 className="text-2xl font-bold mb-4">{module.title}</h3>
+                <ul className="space-y-2">
+                  {module.features.map((feature, j) => (
+                    <li key={j} className="text-gray-400 flex items-center gap-2">
+                      <span className="text-[#00d4ff]">✓</span>
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Additional Features */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="bg-gradient-to-r from-[#ff6b00]/10 to-[#00d4ff]/10 border border-[#00d4ff]/30 rounded-lg p-8"
+          >
+            <h3 className="text-2xl font-bold mb-6 text-[#00d4ff]">Plus...</h3>
+            <div className="grid md:grid-cols-2 gap-6">
+              {[
+                '✉️ Community Chat - Direct access to the boys',
+                '📲 Weekly Announcements - New tips & strategies',
+                '📚 Downloadable Resources - PDFs, tracking sheets',
+                '🔄 Lifetime Updates - New content added forever',
+                '⏱️ Go At Your Own Pace - No rush, no deadline',
+                '💪 Built Different Community - Real members, real results',
+              ].map((feature, i) => (
+                <p key={i} className="text-gray-300 flex items-center gap-3">
+                  {feature}
+                </p>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* About Section */}
+      <section className="py-20 px-4 bg-[#111111]">
+        <div className="max-w-3xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="text-center"
+          >
+            <h2 className="text-4xl md:text-5xl font-black mb-8">
+              Meet Kirkybruz
+            </h2>
+            <div className="w-32 h-32 bg-gradient-to-br from-[#ff6b00] to-[#00d4ff] rounded-full mx-auto mb-8 flex items-center justify-center text-6xl">
+              💪
+            </div>
+            <p className="text-2xl font-bold mb-6">
+              Just a young guy who figured it out
+            </p>
+            <p className="text-lg text-gray-400 mb-6 leading-relaxed">
+              I went from living like a zombie—tired, unmotivated, watching everyone else win—to actually being built different. Not just physically, but mentally. It wasn't magic. It was having the right system.
+            </p>
+            <p className="text-lg text-gray-400 leading-relaxed">
+              Now I'm sharing exactly what worked for me so young Aussie blokes don't waste years figuring it out like I did. This isn't some fitness influencer hype. It's what actually works when you commit.
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Enhanced Testimonials */}
+      <section className="py-20 px-4">
+        <div className="max-w-5xl mx-auto">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="text-4xl md:text-5xl font-black mb-12 text-center"
+          >
+            The Boys Are Winning
+          </motion.h2>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              {
+                name: 'Jake',
+                location: 'Sydney',
+                testimonial: '12 weeks in and I\'m unrecognizable. Energy is through the roof. The plan just works, mate.',
+                stats: ['+8kg', '+2x Energy'],
+                initial: 'J',
+              },
+              {
+                name: 'Lachie',
+                location: 'Melbourne',
+                testimonial: 'Brain fog gone. Finally sharp for once. The results speak for themselves. Recommended to all the boys.',
+                stats: ['+6kg', '+100% Focus'],
+                initial: 'L',
+              },
+              {
+                name: 'Tyler',
+                location: 'Brisbane',
+                testimonial: 'Honestly didn\'t think this would work but nah. Biggest transformation I\'ve ever done. Worth every cent.',
+                stats: ['+10kg', '+50% Confidence'],
+                initial: 'T',
+              },
+            ].map((testimonial, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: i * 0.1 }}
+                viewport={{ once: true }}
+                whileHover={{ y: -8 }}
+                className="p-8 bg-[#111111] rounded-lg border border-gray-800 hover:border-[#ff6b00] hover:shadow-lg hover:shadow-[#ff6b00]/20 transition-all duration-300 group cursor-pointer"
+              >
+                {/* Photo Placeholder */}
+                <div className="w-16 h-16 bg-gradient-to-br from-[#ff6b00] to-[#00d4ff] rounded-full flex items-center justify-center font-bold text-2xl text-[#0a0a0a] mb-4 group-hover:scale-110 transition-transform">
+                  {testimonial.initial}
+                </div>
+
+                {/* Star Rating */}
+                <div className="flex gap-1 mb-4">
+                  {[...Array(5)].map((_, j) => (
+                    <span key={j} className="text-[#ff6b00]">★</span>
+                  ))}
+                </div>
+
+                {/* Testimonial Text */}
+                <p className="text-gray-400 mb-4 italic leading-relaxed">
+                  "{testimonial.testimonial}"
+                </p>
+
+                {/* Name & Location */}
+                <p className="font-bold mb-1">{testimonial.name}</p>
+                <p className="text-sm text-gray-500 mb-4">{testimonial.location}</p>
+
+                {/* Transformation Stats */}
+                <div className="flex gap-4 pt-4 border-t border-gray-800">
+                  {testimonial.stats.map((stat, j) => (
+                    <div key={j} className="text-[#00d4ff] font-bold text-sm">
+                      {stat}
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Premium Pricing Section */}
+      <section className="py-20 px-4">
+        <div className="max-w-2xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-4xl md:text-5xl font-black mb-4 text-center">
+              Simple Pricing
+            </h2>
+            <p className="text-center text-gray-400 mb-12 text-lg">
+              No recurring charges. No hidden costs. No BS.
+            </p>
+
+            {/* Premium Price Card */}
+            <div className="relative bg-gradient-to-br from-[#111111] to-[#0a0a0a] p-1 rounded-lg mb-8">
+              <div className="absolute inset-0 bg-gradient-to-r from-[#ff6b00] to-[#00d4ff] rounded-lg opacity-20 blur-xl" />
+              
+              <div className="relative bg-[#0a0a0a] p-12 rounded-lg border border-[#ff6b00]/30">
+                {/* Limited Spots Badge */}
+                <div className="absolute -top-6 left-1/2 transform -translate-x-1/2">
+                  <div className="bg-gradient-to-r from-[#ff6b00] to-orange-600 px-6 py-2 rounded-full text-sm font-bold whitespace-nowrap">
+                    ⏰ Only 50 spots left
+                  </div>
+                </div>
+
+                <div className="text-center">
+                  <p className="text-gray-400 mb-4 text-lg font-semibold">One-time investment</p>
+                  <div className="text-8xl font-black text-transparent bg-gradient-to-r from-[#ff6b00] to-[#00d4ff] bg-clip-text mb-4">
+                    $57
+                  </div>
+                  <p className="text-gray-400 mb-8 text-lg">Lifetime access. Updates forever.</p>
+
+                  {/* Features List */}
+                  <div className="space-y-3 mb-8 text-left max-w-xs mx-auto">
+                    {[
+                      '✓ Complete diet & training system',
+                      '✓ Mental game framework',
+                      '✓ Community access',
+                      '✓ Lifetime updates',
+                      '✓ Downloadable resources',
+                      '✓ Move at your own pace',
+                    ].map((feature, i) => (
+                      <p key={i} className="text-gray-300 flex items-center gap-3">
+                        <span className="text-[#00d4ff]">{feature.split(' ')[0]}</span>
+                        {feature.substring(2)}
+                      </p>
+                    ))}
+                  </div>
+
+                  {/* CTA Button */}
+                  <motion.a
+                    href="https://whop.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="inline-block w-full bg-gradient-to-r from-[#ff6b00] to-orange-600 text-[#0a0a0a] px-8 py-5 rounded-lg font-black text-xl hover:shadow-2xl hover:shadow-[#ff6b00]/50 transition-all duration-300 group relative overflow-hidden"
+                  >
+                    <span className="relative z-10">Join The Club Now</span>
+                    <div className="absolute inset-0 bg-gradient-to-r from-orange-600 to-[#ff6b00] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  </motion.a>
+
+                  <p className="text-gray-500 text-sm mt-6">
+                    Secure checkout. 30-day access guarantee.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Footer Section */}
+      <footer className="py-12 px-4 border-t border-gray-800 bg-[#0a0a0a]">
+        <div className="max-w-5xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="flex flex-col md:flex-row items-center justify-between mb-8 gap-6"
+          >
+            <div className="text-center md:text-left">
+              <p className="text-gray-400 mb-4 font-bold">Follow The Movement</p>
+              <a
+                href="https://instagram.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#ff6b00] font-bold hover:text-[#00d4ff] transition-colors text-lg"
+              >
+                @kirkybruz on Instagram
+              </a>
+            </div>
+            <div className="text-center md:text-right">
+              <p className="font-bold text-lg mb-2">Built Different</p>
+              <p className="text-sm text-gray-500">
+                Testosterone Optimization Program
+              </p>
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="text-center text-gray-600 text-sm border-t border-gray-800 pt-8"
+          >
+            <p className="mb-4">
+              These statements are for educational purposes. Always consult a healthcare professional before starting any new health regimen.
+            </p>
+            <p>&copy; 2026 Kirkybruz. Built different. Staying different.</p>
+          </motion.div>
+        </div>
+      </footer>
+
+      {/* Sticky Mobile CTA Bar */}
+      <motion.div
+        initial={{ y: 100 }}
+        whileInView={{ y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="fixed bottom-0 left-0 right-0 md:hidden bg-gradient-to-t from-[#0a0a0a] to-[#0a0a0a]/80 backdrop-blur border-t border-[#ff6b00]/30 p-4 z-50"
+      >
+        <a
+          href="https://whop.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="block w-full bg-gradient-to-r from-[#ff6b00] to-orange-600 text-[#0a0a0a] py-4 rounded-lg font-black text-center text-lg hover:shadow-2xl hover:shadow-[#ff6b00]/50 transition-all"
+        >
+          Join The Club - $57
+        </a>
+      </motion.div>
+
+      {/* Spacing for mobile CTA */}
+      <div className="h-20 md:h-0" />
     </div>
   );
 }
