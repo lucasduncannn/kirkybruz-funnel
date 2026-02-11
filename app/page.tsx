@@ -90,10 +90,10 @@ export default function Home() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-5xl md:text-8xl font-black mb-6 leading-tight"
           >
-            Built Different.
+            Stop Being Average.
             <br />
             <span className="bg-gradient-to-r from-[#ff6b00] to-[#00d4ff] bg-clip-text text-transparent">
-              Live Different.
+              Actually Build Yourself.
             </span>
           </motion.h1>
 
@@ -104,7 +104,7 @@ export default function Home() {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto font-semibold"
           >
-            One payment. Lifetime access. No BS.
+            Get your hormone levels right. Get strong. Actually know what you're doing.
           </motion.p>
 
           {/* Before → After Visual */}
@@ -112,24 +112,8 @@ export default function Home() {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="grid md:grid-cols-2 gap-8 mb-12 max-w-3xl mx-auto"
+            className="mb-12"
           >
-            <div className="p-8 bg-red-500/10 border border-red-500/30 rounded-xl">
-              <p className="text-sm text-gray-400 mb-2">BEFORE</p>
-              <div className="space-y-2">
-                <p className="text-2xl font-bold text-red-400">😴 Tired</p>
-                <p className="text-gray-400">Brain fog & no focus</p>
-                <p className="text-gray-400">Can't see results</p>
-              </div>
-            </div>
-            <div className="p-8 bg-[#00d4ff]/10 border border-[#00d4ff]/30 rounded-xl">
-              <p className="text-sm text-gray-400 mb-2">AFTER</p>
-              <div className="space-y-2">
-                <p className="text-2xl font-bold text-[#00d4ff]">⚡ Energized</p>
-                <p className="text-gray-400">Sharp & focused daily</p>
-                <p className="text-gray-400">Built & confident</p>
-              </div>
-            </div>
           </motion.div>
 
           {/* Limited Spots Badge */}
@@ -140,7 +124,7 @@ export default function Home() {
             className="mb-8"
           >
             <div className="inline-block bg-gradient-to-r from-[#ff6b00] to-orange-600 px-6 py-2 rounded-full text-sm font-bold animate-pulse">
-              ⏰ Limited: Only 50 spots open this month
+              ⏰ Real talk: 50 spots this month. That's it.
             </div>
           </motion.div>
 
@@ -151,7 +135,7 @@ export default function Home() {
             transition={{ duration: 0.8, delay: 1 }}
           >
             <a
-              href="https://whop.com"
+              href="https://whop.com/checkout/plan_sJmA9B5hhxnJZ"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-block bg-gradient-to-r from-[#ff6b00] to-orange-600 text-[#0a0a0a] px-12 py-4 rounded-lg font-black text-lg hover:shadow-2xl hover:shadow-[#ff6b00]/50 transition-all duration-300 group relative overflow-hidden"
@@ -181,7 +165,7 @@ export default function Home() {
             viewport={{ once: true }}
             className="text-4xl md:text-5xl font-black mb-16 text-center"
           >
-            Your Journey
+            Your Actual Roadmap
           </motion.h2>
 
           {/* Horizontal Timeline */}
@@ -195,25 +179,25 @@ export default function Home() {
                 {
                   stage: 1,
                   title: "You're In",
-                  desc: 'Get instant access to everything',
+                  desc: 'Everything unlocked. No waiting, no BS.',
                   icon: '🔓',
                 },
                 {
                   stage: 2,
                   title: 'Foundation',
-                  desc: 'Lock in your diet and daily habits',
+                  desc: 'Dial in your diet and habits. This is where it happens.',
                   icon: '🏗️',
                 },
                 {
                   stage: 3,
                   title: 'Momentum',
-                  desc: 'Energy and confidence start clicking',
+                  desc: 'Now you feel different. Energy, clarity, actual strength.',
                   icon: '⚡',
                 },
                 {
                   stage: 4,
-                  title: 'Built Different',
-                  desc: 'This is just how you live now',
+                  title: 'Untouchable',
+                  desc: 'This is your life now. You\'ve won.',
                   icon: '👑',
                 },
               ].map((item, i) => (
@@ -263,7 +247,7 @@ export default function Home() {
             viewport={{ once: true }}
             className="text-center text-gray-400 mt-16 text-lg italic"
           >
-            Go at your own pace. You're in for life.
+            No timer. Go at your own pace. You own this forever.
           </motion.p>
         </div>
       </section>
@@ -292,7 +276,7 @@ export default function Home() {
 
               {/* Text overlay */}
               <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[#0a0a0a] to-transparent p-6">
-                <p className="text-xl font-bold text-white">Watch Kirkybruz Explain The System</p>
+                <p className="text-xl font-bold text-white">How You Actually Fix Your Test & Get Results</p>
               </div>
             </div>
           </motion.div>
@@ -309,19 +293,19 @@ export default function Home() {
             viewport={{ once: true }}
             className="text-4xl md:text-5xl font-black mb-4 text-center"
           >
-            Your Transformation Journey
+            What's Actually Going To Happen
           </motion.h2>
           <p className="text-center text-gray-400 mb-16 text-lg">
-            No time limit. Go at your own pace. Lifetime access means you own this forever.
+            This isn't a race. You've got lifetime access. Do this right.
           </p>
 
           {/* Journey Steps */}
           <div className="grid md:grid-cols-4 gap-6">
             {[
-              { title: 'Day 1: You\'re In', desc: 'Access everything. Get your plan.' },
-              { title: 'First Wins', desc: 'Energy & focus return. Brain fog gone.' },
-              { title: 'Level Up', desc: 'The boys start noticing. You feel powerful.' },
-              { title: 'Final Form', desc: 'Built different. Living different.' },
+              { title: 'Week 1: Get Started', desc: 'Download the system. Actually read it. No shortcuts here.' },
+              { title: 'Week 2-3: First Changes', desc: 'Sleep better. Lift harder. Energy starts coming back.' },
+              { title: 'Week 4-6: People Notice', desc: 'Mates ask what you\'re doing. You look different. You feel invincible.' },
+              { title: 'Week 8+: This Is You Now', desc: 'Built different. This isn\'t temporary. This is your baseline.' },
             ].map((step, i) => (
               <motion.div
                 key={i}
@@ -362,7 +346,7 @@ export default function Home() {
             viewport={{ once: true }}
             className="text-4xl md:text-5xl font-black mb-16 text-center"
           >
-            What Happens When You Commit
+            Listen Up: Here's The Difference
           </motion.h2>
 
           <div className="grid md:grid-cols-2 gap-12">
@@ -373,14 +357,14 @@ export default function Home() {
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
             >
-              <h3 className="text-3xl font-bold mb-8 text-gray-400">Where You Are Now</h3>
+              <h3 className="text-3xl font-bold mb-8 text-gray-400">Right Now (Yeah, You)</h3>
               <div className="space-y-6">
                 {[
-                  { icon: '😴', text: 'Exhausted by afternoon' },
-                  { icon: '🌫️', text: 'Brain fog daily' },
-                  { icon: '📉', text: 'No visible results' },
-                  { icon: '😕', text: 'Lacking confidence' },
-                  { icon: '💭', text: 'Zero motivation' },
+                  { icon: '😴', text: 'Dead by 3pm every day' },
+                  { icon: '🌫️', text: 'Your brain feels like cement' },
+                  { icon: '📉', text: 'Hitting the gym for 6 months. Same size.' },
+                  { icon: '😕', text: 'No confidence. Zero belief in yourself.' },
+                  { icon: '💭', text: 'You know what to do. You just can\'t do it.' },
                 ].map((item, i) => (
                   <motion.div
                     key={i}
@@ -404,14 +388,14 @@ export default function Home() {
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
             >
-              <h3 className="text-3xl font-bold mb-8 text-[#00d4ff]">Where You'll Be</h3>
+              <h3 className="text-3xl font-bold mb-8 text-[#00d4ff]">3 Months: The New You</h3>
               <div className="space-y-6">
                 {[
-                  { icon: '⚡', text: 'All-day energy', stat: '+2x' },
-                  { icon: '🧠', text: 'Crystal clear focus', stat: '+100%' },
-                  { icon: '💪', text: 'Visible muscle gain', stat: '+10kg' },
-                  { icon: '😎', text: 'Authentic confidence', stat: '+Max' },
-                  { icon: '🔥', text: 'Unstoppable drive', stat: '+∞' },
+                  { icon: '⚡', text: 'Energy all day. Actually want to train.', stat: '+2x' },
+                  { icon: '🧠', text: 'Your head is clear. You think straight.', stat: '+100%' },
+                  { icon: '💪', text: 'People ask what you\'re doing. You look built.', stat: '+10kg' },
+                  { icon: '😎', text: 'Confidence isn\'t faked. It\'s real.', stat: '+Max' },
+                  { icon: '🔥', text: 'You\'re unstoppable. Other blokes notice.', stat: '+∞' },
                 ].map((item, i) => (
                   <motion.div
                     key={i}
@@ -466,10 +450,10 @@ export default function Home() {
             viewport={{ once: true }}
             className="text-4xl md:text-5xl font-black mb-6 text-center"
           >
-            What's Inside the Club
+            You're Getting Three Things
           </motion.h2>
           <p className="text-center text-gray-400 mb-16 text-lg max-w-2xl mx-auto">
-            Lifetime access. Updates forever. No upsells. No BS. Everything you need to get built different.
+            Lifetime access. Never expires. Never gets upsold. This is it.
           </p>
 
           {/* Course Modules */}
@@ -477,18 +461,18 @@ export default function Home() {
             {[
               {
                 icon: '🍽️',
-                title: 'Diet Plan',
-                features: ['Exact meal breakdown', 'Macro targets', 'Supplement stack', 'Shopping lists'],
+                title: 'The Diet',
+                features: ['Exact meals (no guessing)', 'Macros dialled in', 'Supplement stack that works', 'Weekly shopping lists'],
               },
               {
                 icon: '⚙️',
-                title: 'Daily Habits',
-                features: ['Sleep protocol', 'Training schedule', 'Stress management', 'Recovery guide'],
+                title: 'The Protocol',
+                features: ['Sleep system (actually works)', 'Training split (proven)', 'Stress management (real shit)', 'Recovery guide (don\'t skip)'],
               },
               {
                 icon: '🧠',
-                title: 'Mental Game',
-                features: ['Mindset framework', 'Confidence hacks', 'Motivation tips', 'Discipline system'],
+                title: 'The Mindset',
+                features: ['Discipline framework', 'Build real confidence', 'Stay motivated (forever)', 'Rules to live by'],
               },
             ].map((module, i) => (
               <motion.div
@@ -521,15 +505,15 @@ export default function Home() {
             viewport={{ once: true }}
             className="bg-gradient-to-r from-[#ff6b00]/10 to-[#00d4ff]/10 border border-[#00d4ff]/30 rounded-lg p-8"
           >
-            <h3 className="text-2xl font-bold mb-6 text-[#00d4ff]">Plus...</h3>
+            <h3 className="text-2xl font-bold mb-6 text-[#00d4ff]">Plus The Real Stuff:</h3>
             <div className="grid md:grid-cols-2 gap-6">
               {[
-                '✉️ Community Chat - Direct access to the boys',
-                '📲 Weekly Announcements - New tips & strategies',
-                '📚 Downloadable Resources - PDFs, tracking sheets',
-                '🔄 Lifetime Updates - New content added forever',
-                '⏱️ Go At Your Own Pace - No rush, no deadline',
-                '💪 Built Different Community - Real members, real results',
+                '✉️  Private community - Real blokes. Real talk.',
+                '📲  Weekly updates - New science. New tactics.',
+                '📚  Downloadable sheets - Print it. Use it. Win.',
+                '🔄  Lifetime updates - We keep adding. Forever.',
+                '⏱️  No deadlines - You own this. Forever.',
+                '💪  Real support - Actual humans. Not bots.',
               ].map((feature, i) => (
                 <p key={i} className="text-gray-300 flex items-center gap-3">
                   {feature}
@@ -551,19 +535,19 @@ export default function Home() {
             className="text-center"
           >
             <h2 className="text-4xl md:text-5xl font-black mb-8">
-              Meet Kirkybruz
+              Who Am I?
             </h2>
             <div className="w-32 h-32 bg-gradient-to-br from-[#ff6b00] to-[#00d4ff] rounded-full mx-auto mb-8 flex items-center justify-center text-6xl">
               💪
             </div>
             <p className="text-2xl font-bold mb-6">
-              Just a young guy who figured it out
+              Just a bloke who fixed himself
             </p>
             <p className="text-lg text-gray-400 mb-6 leading-relaxed">
-              I went from living like a zombie—tired, unmotivated, watching everyone else win—to actually being built different. Not just physically, but mentally. It wasn't magic. It was having the right system.
+              I was exactly where you are. Tired. Unmotivated. Watching other blokes actually live. So I figured it out. Studied the science. Tested everything.  And yeah, I built myself from zero.
             </p>
             <p className="text-lg text-gray-400 leading-relaxed">
-              Now I'm sharing exactly what worked for me so young Aussie blokes don't waste years figuring it out like I did. This isn't some fitness influencer hype. It's what actually works when you commit.
+              Now I'm giving you the exact blueprint. Not some flashy bullshit. Not influencer nonsense. Real science. Real results. Real talk. This is what actually works when you stop making excuses and start building.
             </p>
           </motion.div>
         </div>
@@ -579,7 +563,7 @@ export default function Home() {
             viewport={{ once: true }}
             className="text-4xl md:text-5xl font-black mb-12 text-center"
           >
-            The Boys Are Winning
+            Real Blokes. Real Results.
           </motion.h2>
 
           <div className="grid md:grid-cols-3 gap-8">
@@ -587,21 +571,21 @@ export default function Home() {
               {
                 name: 'Jake',
                 location: 'Sydney',
-                testimonial: '12 weeks in and I\'m unrecognizable. Energy is through the roof. The plan just works, mate.',
+                testimonial: '3 months in and I didn\'t think this would actually work. Mates are asking what I\'m doing. Energy is insane. The system just works.',
                 stats: ['+8kg', '+2x Energy'],
                 initial: 'J',
               },
               {
                 name: 'Lachie',
                 location: 'Melbourne',
-                testimonial: 'Brain fog gone. Finally sharp for once. The results speak for themselves. Recommended to all the boys.',
+                testimonial: 'Brain fog completely gone. Actually sharp now. Results showing. Recommended to all my mates. Worth every cent.',
                 stats: ['+6kg', '+100% Focus'],
                 initial: 'L',
               },
               {
                 name: 'Tyler',
                 location: 'Brisbane',
-                testimonial: 'Honestly didn\'t think this would work but nah. Biggest transformation I\'ve ever done. Worth every cent.',
+                testimonial: 'Didn\'t expect this to work but mate, biggest change I\'ve made. Built different now. Real results. Proper investment.',
                 stats: ['+10kg', '+50% Confidence'],
                 initial: 'T',
               },
@@ -704,7 +688,7 @@ export default function Home() {
 
                   {/* CTA Button */}
                   <motion.a
-                    href="https://whop.com"
+                    href="https://whop.com/checkout/plan_sJmA9B5hhxnJZ"
                     target="_blank"
                     rel="noopener noreferrer"
                     whileHover={{ scale: 1.05 }}
@@ -736,20 +720,20 @@ export default function Home() {
             className="flex flex-col md:flex-row items-center justify-between mb-8 gap-6"
           >
             <div className="text-center md:text-left">
-              <p className="text-gray-400 mb-4 font-bold">Follow The Movement</p>
+              <p className="text-gray-400 mb-4 font-bold">Hit Me Up</p>
               <a
-                href="https://instagram.com"
+                href="https://instagram.com/oikirkybruz"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-[#ff6b00] font-bold hover:text-[#00d4ff] transition-colors text-lg"
               >
-                @kirkybruz on Instagram
+                @oikirkybruz on Instagram
               </a>
             </div>
             <div className="text-center md:text-right">
-              <p className="font-bold text-lg mb-2">Built Different</p>
+              <p className="font-bold text-lg mb-2">Built Different™</p>
               <p className="text-sm text-gray-500">
-                Testosterone Optimization Program
+                Testosterone Optimization. For blokes who actually want to change.
               </p>
             </div>
           </motion.div>
@@ -762,9 +746,9 @@ export default function Home() {
             className="text-center text-gray-600 text-sm border-t border-gray-800 pt-8"
           >
             <p className="mb-4">
-              These statements are for educational purposes. Always consult a healthcare professional before starting any new health regimen.
+              These statements are for education. Not medical advice. Talk to a doctor if you're a complete idiot. Or just actually read the content properly.
             </p>
-            <p>&copy; 2026 Kirkybruz. Built different. Staying different.</p>
+            <p>&copy; 2026 Built Different™. Stop being average.</p>
           </motion.div>
         </div>
       </footer>
@@ -777,7 +761,7 @@ export default function Home() {
         className="fixed bottom-0 left-0 right-0 md:hidden bg-gradient-to-t from-[#0a0a0a] to-[#0a0a0a]/80 backdrop-blur border-t border-[#ff6b00]/30 p-4 z-50"
       >
         <a
-          href="https://whop.com"
+          href="https://whop.com/checkout/plan_sJmA9B5hhxnJZ"
           target="_blank"
           rel="noopener noreferrer"
           className="block w-full bg-gradient-to-r from-[#ff6b00] to-orange-600 text-[#0a0a0a] py-4 rounded-lg font-black text-center text-lg hover:shadow-2xl hover:shadow-[#ff6b00]/50 transition-all"
