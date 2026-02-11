@@ -283,7 +283,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Transformation Journey */}
+      {/* Your Roadmap */}
       <section className="py-20 px-4 bg-[#111111]">
         <div className="max-w-5xl mx-auto">
           <motion.h2
@@ -336,7 +336,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Before/After Transformation Stats */}
+      {/* Stats Section */}
       <section className="py-20 px-4">
         <div className="max-w-5xl mx-auto">
           <motion.h2
@@ -620,7 +620,7 @@ export default function Home() {
                 <p className="font-bold mb-1">{testimonial.name}</p>
                 <p className="text-sm text-gray-500 mb-4">{testimonial.location}</p>
 
-                {/* Transformation Stats */}
+                {/* Stats */}
                 <div className="flex gap-4 pt-4 border-t border-gray-800">
                   {testimonial.stats.map((stat, j) => (
                     <div key={j} className="text-[#00d4ff] font-bold text-sm">
@@ -698,10 +698,6 @@ export default function Home() {
                     <span className="relative z-10">Join The Club Now</span>
                     <div className="absolute inset-0 bg-gradient-to-r from-orange-600 to-[#ff6b00] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   </motion.a>
-
-                  <p className="text-gray-500 text-sm mt-6">
-                    Secure checkout. 30-day access guarantee.
-                  </p>
                 </div>
               </div>
             </div>
