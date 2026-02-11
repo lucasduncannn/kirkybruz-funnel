@@ -90,10 +90,10 @@ export default function Home() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-5xl md:text-8xl font-black mb-6 leading-tight"
           >
-            Stop Being Average.
+            Haven't Gotten Some in a While?
             <br />
             <span className="bg-gradient-to-r from-[#ff6b00] to-[#00d4ff] bg-clip-text text-transparent">
-              Actually Build Yourself.
+              Small Johnson? Low Test?
             </span>
           </motion.h1>
 
@@ -104,16 +104,23 @@ export default function Home() {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto font-semibold"
           >
-            Get your hormone levels right. Get strong. Actually know what you're doing.
+            Time to get some.
           </motion.p>
 
-          {/* Before → After Visual */}
+          {/* Arrow Down */}
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
             className="mb-12"
           >
+            <motion.div
+              animate={{ y: [0, 10, 0] }}
+              transition={{ duration: 1.5, repeat: Infinity }}
+              className="text-center text-7xl"
+            >
+              ↓
+            </motion.div>
           </motion.div>
 
           {/* Limited Spots Badge */}
@@ -138,10 +145,10 @@ export default function Home() {
               href="https://whop.com/checkout/plan_sJmA9B5hhxnJZ"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-block bg-gradient-to-r from-[#ff6b00] to-orange-600 text-[#0a0a0a] px-12 py-4 rounded-lg font-black text-lg hover:shadow-2xl hover:shadow-[#ff6b00]/50 transition-all duration-300 group relative overflow-hidden"
+              className="inline-block bg-green-500 hover:bg-green-600 text-white px-16 py-5 rounded-lg font-black text-xl transition-all duration-300 group relative overflow-hidden hover:shadow-2xl hover:shadow-green-500/50 transform hover:scale-105"
             >
               <span className="relative z-10 flex items-center gap-2">
-                Get The Plan
+                Get a Bigger Slong
                 <motion.span
                   animate={{ x: [0, 5, 0] }}
                   transition={{ duration: 1.5, repeat: Infinity }}
@@ -149,7 +156,6 @@ export default function Home() {
                   →
                 </motion.span>
               </span>
-              <div className="absolute inset-0 bg-gradient-to-r from-orange-600 to-[#ff6b00] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </a>
           </motion.div>
         </div>
@@ -302,10 +308,10 @@ export default function Home() {
           {/* Journey Steps */}
           <div className="grid md:grid-cols-4 gap-6">
             {[
-              { title: 'Week 1: Get Started', desc: 'Download the system. Actually read it. No shortcuts here.' },
-              { title: 'Week 2-3: First Changes', desc: 'Sleep better. Lift harder. Energy starts coming back.' },
-              { title: 'Week 4-6: People Notice', desc: 'Mates ask what you\'re doing. You look different. You feel invincible.' },
-              { title: 'Week 8+: This Is You Now', desc: 'Built different. This isn\'t temporary. This is your baseline.' },
+              { title: 'Week 1: Denial', desc: 'You start the program. Doubt everything. Question if this was a scam. It wasn\'t.' },
+              { title: 'Week 2-3: Plot Twist', desc: 'Your jeans fit different. Sleep bangs. You actually want to gym. Your mates notice something\'s changed.' },
+              { title: 'Week 4-6: Mid-Glow Up', desc: 'Looking in the mirror hits different. Energy is disgusting. Confidence not manufactured anymore. You\'re becoming the guy.' },
+              { title: 'Week 8+: Different Breed', desc: 'Built different. Actually. This version of you is permanent now. You won. Everyone knows it.' },
             ].map((step, i) => (
               <motion.div
                 key={i}
@@ -571,21 +577,21 @@ export default function Home() {
               {
                 name: 'Jake',
                 location: 'Sydney',
-                testimonial: '3 months in and I didn\'t think this would actually work. Mates are asking what I\'m doing. Energy is insane. The system just works.',
+                testimonial: 'Legit thought this was mid. Three months later my ex keeps texting me asking what I changed. Test levels are actually insane. This hits different.',
                 stats: ['+8kg', '+2x Energy'],
                 initial: 'J',
               },
               {
                 name: 'Lachie',
                 location: 'Melbourne',
-                testimonial: 'Brain fog completely gone. Actually sharp now. Results showing. Recommended to all my mates. Worth every cent.',
+                testimonial: 'The brain fog was REAL. Felt like I was operating in 480p. Now? 4K clarity. Sharp as. My boss even asked if I got promoted somewhere else first.',
                 stats: ['+6kg', '+100% Focus'],
                 initial: 'L',
               },
               {
                 name: 'Tyler',
                 location: 'Brisbane',
-                testimonial: 'Didn\'t expect this to work but mate, biggest change I\'ve made. Built different now. Real results. Proper investment.',
+                testimonial: 'Nah this doesn\'t actually work... LOL jk it absolutely does. Every baseline metric changed. I\'m actually built different. Worth every penny.',
                 stats: ['+10kg', '+50% Confidence'],
                 initial: 'T',
               },
@@ -741,6 +747,9 @@ export default function Home() {
             viewport={{ once: true }}
             className="text-center text-gray-600 text-sm border-t border-gray-800 pt-8"
           >
+            <p className="mb-4 text-red-600/80 font-semibold">
+              ⚠️  NOT MEDICAL ADVICE. I'm not a doctor. Don't use me as one. If you have a johnson, go see an actual doctor before doing anything. This is educational content for entertainment. We sell programs, not medical miracles. Your johnson is your responsibility.
+            </p>
             <p className="mb-4">
               These statements are for education. Not medical advice. Talk to a doctor if you're a complete idiot. Or just actually read the content properly.
             </p>
